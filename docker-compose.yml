@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+   api:
+      # build: .
+      image: atucasa_api
+      container_name: atucasa_api
+      # command: python manage.py runserver 0.0.0.0:8933
+      # environment: 
+      #   HOST_DB: postgres
+      # links:
+      #   - db:postgres
+      volumes:
+        - .:/atucasa
+      ports:
+        - "8933:8933" 

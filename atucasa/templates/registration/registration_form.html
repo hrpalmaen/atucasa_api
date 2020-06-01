@@ -1,0 +1,14 @@
+{% extends 'api/base.html' %}
+{% load i18n %}
+
+{% block content %}
+<hr>
+<hr>
+<h1>Registrate Aquí!</h1>
+<form method="post" action=".">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  <input type="submit" value="{% trans 'Submit' %}" />
+</form>
+{% endblock %}

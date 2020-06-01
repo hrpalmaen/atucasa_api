@@ -1,0 +1,23 @@
+{% extends 'api/base.html' %}
+{% load i18n %}
+
+{% block redes %}
+<li><a href="#" class="fa fa-whatsapp" style="font-size:19px"></a></li>
+<li><a href="#" class="fa fa-facebook-square" style="font-size:19px"></a></li>
+<li><a href="#" class="glyphicon glyphicon-envelope" style="font-size:17px"></a></li>
+<li><a href="#" class="glyphicon glyphicon-earphone" style="font-size:17px"></a></li>
+{% endblock %}
+
+{% block contain %}
+  <h2>Descarga Tu factura</h2>
+  <hr>
+  <div class="space"></div>
+  <form method="post" action="." >
+    {% csrf_token %} 
+    {{ form.as_p }}
+    <input type="submit" value="{% trans 'Log in' %}" />
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+  <p>Olvidó su contraseña? <a href="{% url 'auth_password_reset' %}">{% trans "Recuerdala!" %}</a></p>
+  <p>{% trans "Not member" %}? <a href="{% url 'registration_register' %}">{% trans "Registrate" %}</a>!</p>
+{% endblock %}
