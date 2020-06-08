@@ -31,12 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'rest_framework_jwt',
+    'rest_framework',
+    'corsheaders',
+    'django_filters',
     'atucasa',
 ]
 
@@ -48,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'atucasa_api.urls'
@@ -125,3 +130,58 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'atucasa.User'
+
+# ----------------------------------------------------------------------
+# Se usa para trabajar producción
+# ----------------------------------------------------------------------
+
+# DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
+
+# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_CREDENTIALS = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_FILTER_BACKENDS': (
+#         'django_filters.rest_framework.DjangoFilterBackend',
+#     ),
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAuthenticated',
+#     ),
+#     #'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     #'PAGE_SIZE': 10,
+#     #'PAGINATE_BY_PARAM': 'page_size',
+#     'DEFAULT_PAGINATION_CLASS': 'src.pagination.RestPagination',
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+#         'rest_framework.authentication.SessionAuthentication',
+#         #'rest_framework.authentication.TokenAuthentication',
+#     )
+# }
+
+# Permitir refrescar los tokens
+# JWT_AUTH = {
+
+#     # Tiempo de expiracion del token [5mins]
+
+#     'JWT_EXPIRATION_DELTA': timedelta(seconds=90000000),
+
+#     # Permitir refrescar el token (refresca la fecha de espiracion) [false]
+#     'JWT_ALLOW_REFRESH': True,
+
+#     'JWT_VERIFY_EXPIRATION': False,
+#     # Fecha hasta la cual puede refrescar los tokens [7dias]
+#     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
+
+# }
+
