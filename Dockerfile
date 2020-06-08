@@ -3,6 +3,7 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /atucasa/
 # RUN pip install pipenv
 # RUN pipenv install --system
+RUN ls
 COPY requirements.txt .
 RUN apt update
 # RUN apt install wkhtmltopdf -y
