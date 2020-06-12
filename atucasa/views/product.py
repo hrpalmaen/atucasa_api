@@ -1,4 +1,4 @@
-''' File products file '''
+''' File products views '''
 
 from atucasa.models import Product
 from atucasa.serializer import ProductSerializer
