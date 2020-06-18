@@ -6,6 +6,8 @@ from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from rest_framework_jwt.settings import api_settings
 
+from atucasa.models import Store
+
 class AuthView(APIView):
     ''' Method for authentication '''
     authentication_classes = ()
@@ -15,8 +17,7 @@ class AuthView(APIView):
         ''' autenticate method '''
         
         data = request.data
-        serializer_auth = AuthSerializer(data=data, many=False)
-
+        # serializer_auth = AuthSerializer(data=data, many=False)
         # if not serializer_auth.is_valid():
         #     return Response(serializer_auth.errors, status=400)
         
@@ -24,7 +25,7 @@ class AuthView(APIView):
         password = request.data.get('password')
 
         try:
-            user = authenticate(username=username, password=password)
+            user = authenticate(username=username, password=password, is_active=True)
             groups = user.groups.values_list('name',flat = True)
 
             if user is not None:
@@ -33,14 +34,20 @@ class AuthView(APIView):
                     jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
                     payload = jwt_payload_handler(user)
                     token = jwt_encode_handler(payload)
-                    return Response({'first_name': user.first_name, 'last_name': user.last_name, 'admin': user.is_superuser, 'username': user.username, 'groups': list(groups), 'token': token}, status=202)
+
+                    # Request for id of store
+                    try:
+                        store =  Store.objects.get(user=user.id)
+                        return Response({'first_name': user.first_name, 'last_name': user.last_name, 'username': user.username, 'groups': list(groups), 'token': token, 'store': store.id}, status=202)
+                    except:
+                        Response({'detail': 'El usuario no cuenta con una tienda registrada.'}, status=404)
                 except Exception as e:
                     return Response({'detail': 'Acceso denegado: ' + str(e)}, status=401)
             else:
-                return Response({'detail': 'Las credenciales no son correctas.'}, status=404)
+                return Response({'detail': 'Usuario o contraseña incorrecta.'}, status=404)
             
         except:
-            return Response({'detail': 'El usuario no cuenta con un  perfil activo.'}, status=401)
+            return Response({'detail': 'Usuario o contraseña incorrecta.'}, status=401)
 
 
 
