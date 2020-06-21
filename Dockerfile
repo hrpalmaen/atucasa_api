@@ -1,12 +1,11 @@
-FROM python:3.7.6
+FROM python:3.6.8
 ENV PYTHONUNBUFFERED 1
-WORKDIR /atucasa/
+WORKDIR /atucasa
 # RUN pip install pipenv
 # RUN pipenv install --system
-RUN ls
 COPY requirements.txt .
-RUN apt update
 # RUN apt install wkhtmltopdf -y
+# RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 COPY . .
 EXPOSE 8933
