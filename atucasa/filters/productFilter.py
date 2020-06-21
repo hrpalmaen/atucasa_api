@@ -11,6 +11,7 @@ class ProductFilter(django_filters.rest_framework.FilterSet):
     class Meta:
         model = Product
         fields = {
+            'id': ['exact'],
             'store': ['exact']
         }
-        ordering_fields = ('store')
+        ordering_fields = ('id', 'store')
