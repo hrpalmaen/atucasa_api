@@ -8,7 +8,6 @@ class Audit(models.Model):
     date_created = models.DateTimeField('Fecha creación',auto_now_add=True)
     date_update = models.DateTimeField('Fecha última actualización',auto_now=True)
     is_active = models.BooleanField('Estado', default=True)
-    delete = models.BooleanField('Eliminado', default=False)
 
     class Meta:
         abstract = True
