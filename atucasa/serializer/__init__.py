@@ -6,3 +6,4 @@ from .city import CitySerializer
 from .store import StoreSerializer
 from .categoryStore import CategoryStoreSerializer
 from .categoryProduct import CategoryProductSerializer
+from .group import GroupSerializer

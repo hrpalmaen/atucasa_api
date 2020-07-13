@@ -2,9 +2,9 @@ version: '3.7'
 services:
    api:
       # build: .
-      # image: atucasa_api
+      image: atucasa_api
       # image: cristhiankr/atucasa:dev
-      image: atucasa-service
+      # image: atucasa-service
       container_name: service
       command: python manage.py runserver 0.0.0.0:8933
       # environment: 
@@ -15,10 +15,10 @@ services:
         - .:/atucasa
       ports:
         - "8933:8933"
-   web:
-      image: atucasa-web
-      container_name: web
-      ports: 
-         - "80:80"
+  #  web:
+  #     image: atucasa-web
+  #     container_name: web
+  #     ports: 
+  #        - "80:80"
 
        

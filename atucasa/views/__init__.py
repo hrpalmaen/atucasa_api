@@ -6,3 +6,4 @@ from .city import CityView
 from .store import StoreView
 from .categoryStore import CategoryStoreView
 from .categoryProduct import CategoryProductView
+from .group import GroupView

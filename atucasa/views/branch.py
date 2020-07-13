@@ -7,9 +7,7 @@ from rest_framework import viewsets
 
 
 class BranchView(viewsets.ModelViewSet):
-    '''
-    Vista Grupos - django
-    '''
+    ''' View branch '''
     # permission_code = 'branch'
     queryset = Branch.objects.all()
     serializer_class = BranchSerializer

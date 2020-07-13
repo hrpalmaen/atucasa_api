@@ -4,6 +4,7 @@
 *.pot
 *.pyc
 local_settings.py
+docker-compose.yml
 
 
 ###Python###

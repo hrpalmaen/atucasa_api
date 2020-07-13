@@ -13,6 +13,7 @@ router.register(r'city', CityView)
 router.register(r'store', StoreView)
 router.register(r'category_store', CategoryStoreView)
 router.register(r'category_product', CategoryProductView)
+router.register(r'groups_user', GroupView)
 
 urlpatterns = [
     path('auth/', AuthView.as_view(), name='login'),
