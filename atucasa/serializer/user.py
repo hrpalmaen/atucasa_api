@@ -24,39 +24,37 @@ class UserSerializer(serializers.ModelSerializer):
       raise serializers.ValidationError('Este campo es obligatorio.')
     return value
 
-  # def create(self, validated_data):
-  #   '''  serializer for create users or clients '''
+  def create(self, validated_data):
+    '''  serializer for create users or clients '''
 
-  #   group_data = validated_data.pop('groups')
+    group_data = validated_data.pop('groups')
 
-  #   user = super().create(validated_data)
-  #   user.set_password(validated_data.get('password'))
-  #   user.groups.set(group_data)
-  #   user.save()
+    user = super().create(validated_data)
+    user.set_password(validated_data.get('password'))
+    user.groups.set(group_data)
+    user.save()
 
-  #   # group.user_set.add(user)
-
-  #   return user
+    return user
   
-  # def update(self, instance, validated_data):
-  #   ''' serializer for update users or clients'''
-  #   group_data = validated_data.pop('groups')
+  def update(self, instance, validated_data):
+    ''' serializer for update users or clients'''
+    group_data = validated_data.pop('groups')
     
-  #   user = super().update(instance, validated_data)
-  #   # remove current group
-  #   groupDelete = Group.objects.get(user=user.id)
-  #   groupDelete.user_set.remove(user.id)
-  #   # update current group
-  #   user.groups.set(group_data)
+    user = super().update(instance, validated_data)
+    # remove current group
+    groupDelete = Group.objects.get(user=user.id)
+    groupDelete.user_set.remove(user.id)
+    # update current group
+    user.groups.set(group_data)
     
-  #   if instance.password != validated_data.get('password'):
-  #       user.set_password(validated_data.get('password'))
-  #   user.save()
+    if instance.password != validated_data.get('password'):
+        user.set_password(validated_data.get('password'))
+    user.save()
       
-  #   return user
+    return user
 
   class Meta:
 
     model = User
     fields = ('id', 'username', 'first_name', 'last_name', 'email', 'is_active', 'contact_phone',
-              'is_staff', 'type_identification', 'identification', 'groups')
+              'is_staff', 'type_identification', 'identification', 'groups', 'password')
