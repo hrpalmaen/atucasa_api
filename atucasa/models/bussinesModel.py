@@ -46,6 +46,7 @@ class Store(Audit):
     email = models.CharField('Correo electrónico', max_length=512, null=True, blank=True)
     contact_name = models.CharField('Nombre de contacto', max_length=128, null=True, blank=True)
     phone = models.CharField('Número teléfono', max_length=32)
+    star = models.BooleanField('start', default=False)
 
     def __str__(self):
         return f'{self.name}'
@@ -98,7 +99,8 @@ class Product(Audit):
     url_image = models.URLField('Imagen', max_length=256, null=True, blank=True)
     name_store = models.CharField('Nombre tienda', max_length=128, null=True, blank=True)
     category_product = models.ManyToManyField(Category_Product, verbose_name='Categoria')
-
+    star = models.BooleanField('start', default=False)
+    
     def __str__(self):
         return f'{self.name}'
 
