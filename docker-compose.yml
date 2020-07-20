@@ -12,7 +12,7 @@ services:
       ports:
         - "8933:8933"
   #  web:
-  #     image: atucasa-web
+  #     image: cristhiankr/atucasa-web:dev
   #     container_name: web
   #     ports: 
   #        - "80:80"
