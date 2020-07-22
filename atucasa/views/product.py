@@ -12,6 +12,13 @@ class ProductView(viewsets.ModelViewSet):
     Vista Grupos - django
     '''
     # permission_code = 'product'
-    queryset = Product.objects.all()
+    # queryset = Product.objects.all()
     serializer_class = ProductSerializer
     filter_class = ProductFilter
+
+    def get_queryset(self):
+        params =  self.request.query_params
+        star_param = params.get('star', False)
+        if star_param:
+            return Product.objects.all()[:10]
+        return Product.objects.all()
