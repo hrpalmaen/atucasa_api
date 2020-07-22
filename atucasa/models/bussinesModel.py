@@ -77,6 +77,7 @@ class Category_Product(Audit):
     ''' Model for categories by products '''
     name = models.CharField('Nombre Categoría', max_length=128)
     description = models.CharField('Descripción', max_length=512, null=True, blank=True)
+    url_image = models.URLField('Imagen', max_length=256, null=True, blank=True)
 
     def __str__(self):
         return f'{self.name}'
@@ -95,7 +96,7 @@ class Product(Audit):
     price = models.BigIntegerField('Precio')
     brand = models.CharField('Marca', max_length=32, null=True, blank=True)
     units = models.IntegerField('Unidades disponibles')
-    discount_porcentual = models.DecimalField('Porcentaje de descuento', max_digits = 5, decimal_places = 2, null=True, blank=True)
+    discount_porcentual = models.IntegerField('Porcentaje de descuento', null=True, blank=True)
     url_image = models.URLField('Imagen', max_length=256, null=True, blank=True)
     name_store = models.CharField('Nombre tienda', max_length=128, null=True, blank=True)
     category_product = models.ManyToManyField(Category_Product, verbose_name='Categoria')

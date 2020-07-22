@@ -17,7 +17,6 @@ class AuthSerializer(serializers.ModelSerializer):
         return value
     
     def validate_password(self, value):
-        # print('valuepassseorddddddd: ', data.get('password'))
         if value == '' or value == None:
             raise serializers.ValidationError('Este campo es obligatorio.')
         return value

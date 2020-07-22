@@ -13,6 +13,8 @@ class ProductFilter(django_filters.rest_framework.FilterSet):
         fields = {
             'id': ['exact'],
             'store': ['exact'],
-            'category_product': ['exact']
+            'category_product': ['exact'],
+            'name': ['exact', 'contains'],
+            'star': ['exact']
         }
-        ordering_fields = ('id', 'store', 'category_product')
+        ordering_fields = ('id', 'store', 'category_product', 'name', 'star')
