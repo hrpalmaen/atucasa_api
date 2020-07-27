@@ -13,6 +13,5 @@ class StoreFilter(django_filters.rest_framework.FilterSet):
         fields = {
             'id': ['exact'],
             'name': ['exact', 'contains'],
-            'star': ['exact']
         }
         ordering_fields = ('id', 'name', 'star')
